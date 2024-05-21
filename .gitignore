@@ -67,3 +67,73 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+/client/*.rbc
+/client/capybara-*.html
+/client/.rspec
+/client/db/*.sqlite3
+/client/db/*.sqlite3-journal
+/client/db/*.sqlite3-[0-9]*
+/client/public/system
+/client/coverage/
+/client/spec/tmp
+/client/*.orig
+/client/rerun.txt
+/client/pickle-email-*.html
+
+# Ignore all logfiles and tempfiles.
+/client/log/*
+/client/tmp/*
+!/client/log/.keep
+!/client/tmp/.keep
+
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+/client/config/initializers/secret_token.rb
+/client/config/master.key
+
+# Only include if you have production secrets in this file, which is no longer a Rails default
+# /client/config/secrets.yml
+
+# dotenv, dotenv-rails
+# TODO Comment out these rules if environment variables can be committed
+/client/.env
+/client/.env*.local
+
+## Environment normalization:
+/client/.bundle
+/client/vendor/bundle
+
+# these should all be checked in to normalize the environment:
+# /client/Gemfile.lock, /client/.ruby-version, /client/.ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+/client/.rvmrc
+
+# if using bower-rails ignore default bower_components path bower.json files
+/client/vendor/assets/bower_components
+/client/*.bowerrc
+/client/bower.json
+
+# Ignore pow environment settings
+/client/.powenv
+
+# Ignore Byebug command history file.
+/client/.byebug_history
+
+# Ignore node_modules
+/client/node_modules/
+
+# Ignore precompiled javascript packs
+/client/public/packs
+/client/public/packs-test
+/client/public/assets
+
+# Ignore yarn files
+/client/yarn-error.log
+/client/yarn-debug.log*
+/client/.yarn-integrity
+
+# Ignore uploaded files in development
+/client/storage/*
+!/client/storage/.keep
+/client/public/uploads
