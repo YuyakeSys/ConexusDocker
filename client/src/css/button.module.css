@@ -1,0 +1,13 @@
+.a {
+    background-color: transparent;
+    color: green;
+    border: 2px solid green;
+    margin: 20px;
+    padding: 20px 40px;
+    border-radius: 5px;
+}
+
+.a:hover {
+    background-color: green;
+    color: white;
+}

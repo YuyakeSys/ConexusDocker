@@ -1,0 +1,86 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+version: "3.8"
+# Here the instructions define your application as a service called "app".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  client:
+    depends_on:
+      - api
+    build: ./client
+    ports:
+      - "8080:8080"
+    develop:
+      # we specify the files to watch for changes
+      watch:
+        # it'll watch for changes in package.json and package-lock.json and rebuild the container if there are any changes
+        - path: ./client/package.json
+          action: rebuild
+        - path: ./client/package-lock.json
+          action: rebuild
+        # it'll watch for changes in the frontend directory and sync the changes with the container real time
+        - path: ./client
+          target: /app
+          action: sync
+
+  api:
+    build: ./backend
+    command: bundle exec rails server -b 0.0.0.0
+    volumes:
+      - ./backend:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@db:5432/conexus_development
+      RAILS_MAX_THREADS: 5
+    develop:
+      # specify the files to watch for changes
+      watch:
+        - path: ./backend/package.json
+          action: rebuild
+        - path: ./backend/package-lock.json
+          action: rebuild
+        - path: ./backend
+          target: /app
+          action: sync
+
+  admin:
+    depends_on:
+      - api
+    build: ./admin
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./admin:/app
+    develop:
+      # we specify the files to watch for changes
+      watch:
+        # it'll watch for changes in package.json and package-lock.json and rebuild the container if there are any changes
+        - path: ./admin/package.json
+          action: rebuild
+        - path: ./admin/package-lock.json
+          action: rebuild
+        # it'll watch for changes in the frontend directory and sync the changes with the container real time
+        - path: ./admin
+          target: /app
+          action: sync
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${CONEXUS_DATABASE_PASSWORD}
+      POSTGRES_DB: conexus_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

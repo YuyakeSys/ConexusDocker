@@ -1,0 +1,18 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 5000",
+    "build": "next build",
+    "start": "next start -p 5000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "cookies-next": "^4.1.1",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
+  }
+}

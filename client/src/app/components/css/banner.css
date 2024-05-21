@@ -1,0 +1,26 @@
+.banner {
+  height: 550px;
+}
+
+.banner-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.text-container {
+  background-color: rgba(189, 248, 197, 0.1); /* semi-transparent overlay */
+  padding: 2rem;
+  margin-bottom: 4rem;
+  border-radius: 0.5rem;
+}
+
+.text-content {
+  color: #ffffff; /* white text */
+  text-shadow: 2px 2px 4px #000000; /* black drop shadow to make text stand out */
+  margin-top: 5rem;
+}

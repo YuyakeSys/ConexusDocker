@@ -1,0 +1,61 @@
+/* CompaniesPage.css */
+.companies-page {
+  font-family: "Arial", sans-serif;
+}
+
+.hero-section {
+  background-size: cover;
+  padding: 50px;
+  color: white;
+  text-align: center;
+}
+
+.hero-text h1 {
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  margin-bottom: 20px;
+}
+
+.onboard-button {
+  padding: 10px 20px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.companies-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.company-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.company-card img {
+  width: 100%;
+  height: 150px; /* Adjust as needed */
+  object-fit: cover;
+}
+
+.company-info {
+  padding: 15px;
+}
+
+.company-info h3 {
+  margin: 0;
+  color: #333;
+}
+
+.company-info p {
+  color: #666;
+  font-size: 0.9em;
+}
