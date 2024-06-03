@@ -14,6 +14,8 @@ services:
     build: ./client
     ports:
       - "8080:8080"
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
     develop:
       # we specify the files to watch for changes
       watch:
@@ -37,7 +39,8 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@db:5432/conexus_development
+      # DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@db:5432/conexus_development
+      DATABASE_URL: postgres://Chester:${CONEXUS_DATABASE_PASSWORD}@testdatabase.c5iegegqer2p.us-east-1.rds.amazonaws.com:5432/testdatabase
       RAILS_MAX_THREADS: 5
     develop:
       # specify the files to watch for changes
@@ -58,6 +61,9 @@ services:
       - "5000:5000"
     volumes:
       - ./admin:/app
+      - /app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
     develop:
       # we specify the files to watch for changes
       watch:
@@ -74,9 +80,9 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_USER: postgres
+      POSTGRES_USER: Chester
       POSTGRES_PASSWORD: ${CONEXUS_DATABASE_PASSWORD}
-      POSTGRES_DB: conexus_development
+      POSTGRES_DB: testdatabase
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
