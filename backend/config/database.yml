@@ -26,9 +26,9 @@ default: &default
   host: <%= ENV['DB_HOST'] %>
   port: <%= ENV.fetch('DB_PORT', 5432) %>
   database: <%= ENV['DB_NAME'] %>
+
 development:
   <<: *default
-  database: conexus_development
 
 test:
   <<: *default
