@@ -40,7 +40,7 @@ services:
       - db
     environment:
       # DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@db:5432/conexus_development
-      DATABASE_URL: postgres://Chester:${CONEXUS_DATABASE_PASSWORD}@testdatabase.c5iegegqer2p.us-east-1.rds.amazonaws.com:5432/testdatabase
+      DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@database-1.che0g22eo7q5.eu-north-1.rds.amazonaws.com:5432/conexus
       RAILS_MAX_THREADS: 5
     develop:
       # specify the files to watch for changes
