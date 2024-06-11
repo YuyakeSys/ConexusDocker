@@ -1,3 +1,11 @@
+/*
+ * @Author: Zhouyang Meng
+ * @Date: 2024-05-20 06:38:42
+ * @LastEditTime: 2024-06-11 11:31:24
+ * @Description:
+ *
+ * Copyright (c) 2024 by YuyakeSys, All Rights Reserved.
+ */
 "use client";
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
@@ -11,6 +19,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  console.log("Google API Token:", process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -37,7 +46,9 @@ export default function RootLayout({ children }) {
           <body className={`${inter.className}`}>
             <AuthProvider>
               <NavBar />
-              <div className="container-fluid" style={{ padding: "0" }}>{children}</div>
+              <div className="container-fluid" style={{ padding: "0" }}>
+                {children}
+              </div>
             </AuthProvider>
             <Footer />
           </body>
