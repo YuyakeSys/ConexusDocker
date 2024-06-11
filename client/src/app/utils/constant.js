@@ -6,8 +6,8 @@ export const USER_TYPES = {
 };
 
 export const API_URLS = {
-  BASIC_URL: "http://localhost:3000/api/v1/",
-  SERVER_URL: "http://localhost:3000",
+  BASIC_URL: "http://api:3000/api/v1/",
+  SERVER_URL: "http://api:3000",
 };
 
 export const INDUSTRY_AREAS = [
