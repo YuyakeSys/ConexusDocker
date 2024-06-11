@@ -1,7 +1,7 @@
 /*
  * @Author: Zhouyang Meng
  * @Date: 2024-05-20 06:38:42
- * @LastEditTime: 2024-06-11 11:57:16
+ * @LastEditTime: 2024-06-11 12:04:56
  * @Description:
  *
  * Copyright (c) 2024 by YuyakeSys, All Rights Reserved.
@@ -16,8 +16,6 @@ import { getCookie } from "cookies-next";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "./utils/authContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-require("dotenv").config(); // load environment variables from .env file
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
