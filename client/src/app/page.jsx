@@ -95,8 +95,8 @@ const Page = () => {
         // Replace with the actual URL of your Rails API for the projects endpoint
         // Update the endpoint to accept pagination parameters if necessary
         const [projectsResponse, usersResponse] = await Promise.all([
-          fetch(`${API_URLS.BASIC_URL}/projects?filter=main`),
-          fetch(`${API_URLS.BASIC_URL}/users?page_type=main`),
+          fetch(`${API_URLS.BASIC_URL}projects?filter=main`),
+          fetch(`${API_URLS.BASIC_URL}users?page_type=main`),
         ]);
         console.log("projects", projectsResponse.json);
         console.log("companies", usersResponse.json);
