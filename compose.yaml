@@ -36,8 +36,8 @@ services:
       - ./backend:/app
     ports:
       - "3000:3000"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     environment:
       # DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@db:5432/conexus_development
       DATABASE_URL: postgres://postgres:${CONEXUS_DATABASE_PASSWORD}@database-1.che0g22eo7q5.eu-north-1.rds.amazonaws.com:5432/conexus
@@ -77,16 +77,16 @@ services:
           target: /app
           action: sync
 
-  db:
-    image: postgres:latest
-    environment:
-      POSTGRES_USER: Chester
-      POSTGRES_PASSWORD: ${CONEXUS_DATABASE_PASSWORD}
-      POSTGRES_DB: testdatabase
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres:latest
+  #   environment:
+  #     POSTGRES_USER: Chester
+  #     POSTGRES_PASSWORD: ${CONEXUS_DATABASE_PASSWORD}
+  #     POSTGRES_DB: testdatabase
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
 
 volumes:
   postgres_data:
