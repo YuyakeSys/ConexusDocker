@@ -72,20 +72,38 @@ const ProjectsPage = () => {
     });
   };
 
+  // const fetchData = async (searchQuery = "") => {
+  //   axios
+  //     .get(
+  //       `${API_URLS.BASIC_URL}/projects?page=${currentPage}
+  //   &size=${pageSize}&filter=${filter}&search=${searchQuery}`
+  //     )
+  //     .then((response) => {
+  //       setProjects(response.data.projects);
+  //       setTotalPage(response.data.total_pages);
+  //     })
+  //     .catch((error) => {
+  //       console.log(`Failed to fetch data. Error: ${error}`);
+  //     });
+  // };
+  // try using fetch to use the api routes function
+  useEffect(() => {
+    fetchData(searchQuery);
+  }, [currentPage, pageSize, filter, searchQuery]);
+
   const fetchData = async (searchQuery = "") => {
-    axios
-      .get(
-        `${API_URLS.BASIC_URL}/projects?page=${currentPage}
-    &size=${pageSize}&filter=${filter}&search=${searchQuery}`
-      )
-      .then((response) => {
-        setProjects(response.data.projects);
-        setTotalPage(response.data.total_pages);
-      })
-      .catch((error) => {
-        console.log(`Failed to fetch data. Error: ${error}`);
-      });
+    try {
+      const response = await fetch(
+        `/api/projects?page=${currentPage}&size=${pageSize}&filter=${filter}&search=${searchQuery}`
+      );
+      const data = await response.json();
+      setProjects(data.projects);
+      setTotalPage(data.total_pages);
+    } catch (error) {
+      console.error(`Failed to fetch data. Error: ${error}`);
+    }
   };
+
 
   const fetchRecommendProject = async () => {
     const user_id = user?.id

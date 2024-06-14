@@ -25,7 +25,7 @@ const UserProfile = ({ params }) => {
   // two users/currentUser exists here
   const fetchUser = async (id) => {
     try {
-      const response = await fetch(`${API_URLS.BASIC_URL}/users/${id}`);
+      const response = await fetch(`/api/users/${id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch user");
       }
