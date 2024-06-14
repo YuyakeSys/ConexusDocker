@@ -18,6 +18,7 @@ RUN bundle install
 COPY . .
 
 RUN chmod +x entrypoint.sh
+RUN chmod +x client/entrypoint.sh
 # Expose port 3000
 EXPOSE 3000
 
