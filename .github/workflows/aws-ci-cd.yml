@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - AWS
-      
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,12 +27,12 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker build -t your-dockerhub-username/client ./client
-          docker build -t your-dockerhub-username/api ./backend
-          docker build -t your-dockerhub-username/admin ./admin
-          docker push your-dockerhub-username/client
-          docker push your-dockerhub-username/api
-          docker push your-dockerhub-username/admin
+          docker build -t chestermeng/client ./client
+          docker build -t chestermeng/api ./backend
+          docker build -t chestermeng/admin ./admin
+          docker push chestermeng/client
+          docker push chestermeng/api
+          docker push chestermeng/admin
 
   deploy:
     needs: build
