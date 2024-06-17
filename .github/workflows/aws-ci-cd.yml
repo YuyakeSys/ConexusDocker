@@ -1,0 +1,53 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - AWS
+  pull_request:
+    branches:
+      - AWS
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push Docker images
+        run: |
+          docker build -t your-dockerhub-username/client ./client
+          docker build -t your-dockerhub-username/api ./backend
+          docker build -t your-dockerhub-username/admin ./admin
+          docker push your-dockerhub-username/client
+          docker push your-dockerhub-username/api
+          docker push your-dockerhub-username/admin
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            docker pull your-dockerhub-username/client
+            docker pull your-dockerhub-username/api
+            docker pull your-dockerhub-username/admin
+            cd /path/to/your/docker-compose-directory
+            docker-compose down
+            docker-compose up -d
