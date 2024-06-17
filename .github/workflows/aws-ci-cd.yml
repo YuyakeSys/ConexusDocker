@@ -45,9 +45,10 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
           script: |
-            docker pull your-dockerhub-username/client
-            docker pull your-dockerhub-username/api
-            docker pull your-dockerhub-username/admin
-            cd /path/to/your/docker-compose-directory
+            cd /ConexusDocker
             docker-compose down
-            docker-compose up -d
+            docker-compose up --build
+
+# docker pull chestermeng/client
+# docker pull chestermeng/api
+# docker pull chestermeng/admin
