@@ -48,7 +48,9 @@ jobs:
             cd ConexusDocker
             git pull
             docker-compose down
-            docker-compose up --build -d
+            docker-compose up --build
+
+            docker-compose logs
 
 # docker pull chestermeng/client
 # docker pull chestermeng/api
