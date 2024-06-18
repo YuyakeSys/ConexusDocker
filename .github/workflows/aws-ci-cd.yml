@@ -52,6 +52,7 @@ jobs:
 
             docker-compose logs
 
+# test
 # docker pull chestermeng/client
 # docker pull chestermeng/api
 # docker pull chestermeng/admin
