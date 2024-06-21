@@ -15,7 +15,7 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - .env
+      - ./client/.env
     environment:
       CHOKIDAR_USEPOLLING: "true"
     develop:
@@ -39,7 +39,7 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - ./api/.env
     # depends_on:
     #   - db
     environment:
