@@ -1,7 +1,7 @@
 /*
  * @Author: Zhouyang Meng
  * @Date: 2024-05-20 06:38:42
- * @LastEditTime: 2024-06-11 12:04:56
+ * @LastEditTime: 2024-06-21 15:25:30
  * @Description:
  *
  * Copyright (c) 2024 by YuyakeSys, All Rights Reserved.
@@ -19,7 +19,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
-  console.log("Google API Token:", process.env.NEXT_PUBLIC_GOOGLE_API_TOKEN);
   const [user, setUser] = useState(null);
 
   useEffect(() => {

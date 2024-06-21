@@ -60,6 +60,7 @@ export const signUpUser = async (
   res
 ) => {
   try {
+    console.log("sign up start");
     const response = await axios.post(
       `${API_URLS.BASIC_URL}/users/tokens/sign_up`,
       {
