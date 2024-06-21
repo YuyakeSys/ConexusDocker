@@ -182,13 +182,50 @@ export const loginUser = async (email, password, rememberMe) => {
   }
 };
 
-export const signUpUser = async (userData) => {
-  console.log(userData)
+export const signUpUser = async (
+  email,
+  password,
+  fullName,
+  education,
+  status,
+  mission,
+  teamMember,
+  privacy,
+  userType,
+  belong_to_ids,
+  industry
+) => {
+  console.log({
+    email,
+    password,
+    fullName,
+    education,
+    status,
+    mission,
+    teamMember,
+    privacy,
+    userType,
+    belong_to_ids,
+    industry,
+  });
   try {
     const response = await fetch("/api/users/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "signup", ...userData }),
+      body: JSON.stringify({
+        action: "signup",
+        email,
+        password,
+        full_name: fullName,
+        education,
+        status,
+        mission,
+        team_member: teamMember,
+        privacy,
+        user_type: userType,
+        belong_to_ids,
+        industry,
+      }),
     });
 
     if (!response.ok) {

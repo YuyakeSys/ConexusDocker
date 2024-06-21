@@ -51,22 +51,20 @@ async function handleLogin({ email, password, rememberMe }) {
   }
 }
 
-async function handleSignup(userData) {
+async function handleSignup(
+  email,
+  password,
+  full_name,
+  education,
+  status,
+  mission,
+  team_member,
+  privacy,
+  user_type,
+  belong_to_ids,
+  industry
+) {
   try {
-    const {
-      email,
-      password,
-      full_name,
-      education,
-      status,
-      mission,
-      team_member,
-      privacy,
-      user_type,
-      belong_to_ids,
-      industry,
-    } = userData;
-
     const signUpData = {
       email,
       password,
