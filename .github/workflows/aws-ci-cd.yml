@@ -22,6 +22,20 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
           script: |
+            # Clean up unused Docker resources
+            docker system prune -af --volumes
+
+            # Remove unused images
+            docker image prune -af
+
+            # Remove unused volumes
+            docker volume prune -f
+
+            # Remove unused networks
+            docker network prune -f
+
+            # Display disk usage information
+            df -h
             cd ConexusDocker
             git pull
             docker-compose down
