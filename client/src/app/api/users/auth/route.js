@@ -21,7 +21,6 @@ export async function POST(request) {
   }
 }
 
-
 async function handleLogin({ email, password, rememberMe }) {
   try {
     const response = await axios.post(
@@ -81,6 +80,8 @@ async function handleSignup(userData) {
       belong_to_ids,
       industry,
     };
+
+    console.log(signUpData);
     const response = await axios.post(
       `${API_URLS.SERVER_URL}/users/tokens/sign_up`,
       signUpData

@@ -183,6 +183,7 @@ export const loginUser = async (email, password, rememberMe) => {
 };
 
 export const signUpUser = async (userData) => {
+  console.log(userData)
   try {
     const response = await fetch("/api/users/auth", {
       method: "POST",
