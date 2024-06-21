@@ -167,7 +167,7 @@ import axios from "axios";
 
 export const loginUser = async (email, password, rememberMe) => {
   try {
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/users/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "login", email, password, rememberMe }),
@@ -186,7 +186,7 @@ export const loginUser = async (email, password, rememberMe) => {
 
 export const signUpUser = async (userData) => {
   try {
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/users/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "signup", ...userData }),
@@ -205,7 +205,7 @@ export const signUpUser = async (userData) => {
 
 export const refreshToken = async (refreshToken) => {
   try {
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/users/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "refreshToken", refreshToken }),
@@ -226,7 +226,7 @@ export const refreshToken = async (refreshToken) => {
 
 export const handleLogout = async () => {
   try {
-    const response = await fetch("/api/auth", {
+    const response = await fetch("/api/users/auth", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "logout" }),
@@ -245,18 +245,18 @@ export const handleLogout = async () => {
 };
 
 // You can keep this function if you need to make direct API calls
-export const revokeToken = async (accessToken) => {
-  try {
-    const response = await axios.post(
-      `${API_URLS.SERVER_URL}/users/tokens/revoke`,
-      null,
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
+// export const revokeToken = async (accessToken) => {
+//   try {
+//     const response = await axios.post(
+//       `${API_URLS.SERVER_URL}/users/tokens/revoke`,
+//       null,
+//       {
+//         headers: { Authorization: `Bearer ${accessToken}` },
+//       }
+//     );
 
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || "An error occurred";
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     throw error.response?.data || "An error occurred";
+//   }
+// };
