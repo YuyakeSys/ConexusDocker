@@ -1,15 +1,17 @@
 // utils/auth.js
 import axios from "axios";
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
-
-const API_BASE_URL = "http://127.0.0.1:3000";
+import { API_URLS } from "./constant";
 
 export const loginUser = async (email, password, rememberMe, req, res) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/users/tokens/sign_in`, {
-      email,
-      password,
-    });
+    const response = await axios.post(
+      `${API_URLS.BASIC_URL}/users/tokens/sign_in`,
+      {
+        email,
+        password,
+      }
+    );
 
     const maxAge = rememberMe ? 2592000 : 60 * 60; // 30 days or 1 hour
 
@@ -58,19 +60,22 @@ export const signUpUser = async (
   res
 ) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/users/tokens/sign_up`, {
-      email,
-      password,
-      full_name,
-      education,
-      status,
-      mission,
-      team_member,
-      privacy,
-      user_type,
-      belong_to_ids,
-      industry,
-    });
+    const response = await axios.post(
+      `${API_URLS.BASIC_URL}/users/tokens/sign_up`,
+      {
+        email,
+        password,
+        full_name,
+        education,
+        status,
+        mission,
+        team_member,
+        privacy,
+        user_type,
+        belong_to_ids,
+        industry,
+      }
+    );
     console.log("sign up response", response);
     const { token, refresh_token, resource_owner } = response.data;
 
