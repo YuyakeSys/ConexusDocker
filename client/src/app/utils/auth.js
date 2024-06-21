@@ -163,8 +163,6 @@
 //   }
 // };
 // utils/auth.js
-import axios from "axios";
-
 export const loginUser = async (email, password, rememberMe) => {
   try {
     const response = await fetch("/api/users/auth", {

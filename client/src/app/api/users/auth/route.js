@@ -21,6 +21,7 @@ export async function POST(request) {
   }
 }
 
+
 async function handleLogin({ email, password, rememberMe }) {
   try {
     const response = await axios.post(
@@ -53,9 +54,36 @@ async function handleLogin({ email, password, rememberMe }) {
 
 async function handleSignup(userData) {
   try {
+    const {
+      email,
+      password,
+      full_name,
+      education,
+      status,
+      mission,
+      team_member,
+      privacy,
+      user_type,
+      belong_to_ids,
+      industry,
+    } = userData;
+
+    const signUpData = {
+      email,
+      password,
+      full_name,
+      education,
+      status,
+      mission,
+      team_member,
+      privacy,
+      user_type,
+      belong_to_ids,
+      industry,
+    };
     const response = await axios.post(
       `${API_URLS.SERVER_URL}/users/tokens/sign_up`,
-      userData
+      signUpData
     );
     const { token, refresh_token, resource_owner } = response.data;
 
