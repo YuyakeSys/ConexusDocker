@@ -71,7 +71,7 @@ export default function Signup() {
         setError(error);
       } else {
         // Fallback error message
-        setError("An unknown error occurred", error);
+        setError(error);
         // setError("An unknown error occurred", error);
         console.error(error); // Log the error for debugging purposes
       }

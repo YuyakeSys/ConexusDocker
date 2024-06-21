@@ -63,7 +63,7 @@ export const signUpUser = async (
   try {
     console.log("sign up try");
     const response = await axios.post(
-      `${API_URLS.BASIC_URL}/users/tokens/sign_up`,
+      `${API_URLS.SERVER_URL}/users/tokens/sign_up`,
       {
         email,
         password,
@@ -112,7 +112,7 @@ export const signUpUser = async (
 export const refreshToken = async (refreshToken) => {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/users/tokens/refresh`,
+      `${API_BASE_URL.SERVER_URL}/users/tokens/refresh`,
       null,
       {
         headers: { Authorization: `Bearer ${refreshToken}` },
