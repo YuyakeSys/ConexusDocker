@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 import { cookies } from "next/headers";
-import { API_URLS } from "@/utils/constant";
+import { API_URLS } from "@/app/utils/constant";
 
 export async function POST(request) {
   const body = await request.json();
