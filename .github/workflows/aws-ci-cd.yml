@@ -22,8 +22,6 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_KEY }}
           script: |
-            # Clean up unused Docker resources
-            docker system prune -af --volumes
 
             # Remove unused images
             docker image prune -af
