@@ -104,30 +104,32 @@ const ProjectsPage = () => {
   // update fetch function
   const fetchRecommendProject = async () => {
     const user_id = user?.id;
-    try {
-      const response = await fetch(`/api/projects?user_id=${user_id}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+    if (user_id !== null && user_id !== undefined && user_id !== "") {
+      try {
+        const response = await fetch(`/api/projects?user_id=${user_id}`, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Recommended projects loaded successfully!");
-        console.log("Recommend projects: ", data.recommend_projects);
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Recommended projects loaded successfully!");
+          console.log("Recommend projects: ", data.recommend_projects);
 
-        const allProjectInfo = data.recommend_projects.map(
-          (projectArray) => projectArray[0]
-        );
-        setRecommendProject(allProjectInfo);
-      } else {
-        console.log(
-          `Recommended projects loading failed. Invalid response status: ${response.status}`
-        );
+          const allProjectInfo = data.recommend_projects.map(
+            (projectArray) => projectArray[0]
+          );
+          setRecommendProject(allProjectInfo);
+        } else {
+          console.log(
+            `Recommended projects loading failed. Invalid response status: ${response.status}`
+          );
+        }
+      } catch (error) {
+        console.error(`Project loading failed. Error: ${error.message}`);
       }
-    } catch (error) {
-      console.error(`Project loading failed. Error: ${error.message}`);
     }
   };
   // const fetchRecommendProject = async () => {
@@ -379,4 +381,3 @@ const ProjectsPage = () => {
 export default function ClientProjectsPage() {
   return <ProjectsPage />;
 }
-

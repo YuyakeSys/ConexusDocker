@@ -18,13 +18,85 @@ export default function NavBar() {
   const router = useRouter();
 
   const { user, setUser } = useContext(AuthContext);
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   // avoid re-rendering user avatar
+  // const avatarComponent = useMemo(() => {
+  //   if (user && user.image_url) {
+  //     return (
+  //       <Image
+  //         src={`${API_URLS.SERVER_URL}${user.image_url}`}
+  //         alt="User Profile"
+  //         style={{ width: "40px", height: "40px", marginRight: "8px" }}
+  //         roundedCircle
+  //         className="me-3"
+  //       />
+  //     );
+  //   } else {
+  //     return (
+  //       <Image
+  //         className="border border-gray me-3"
+  //         src="https://i.imgur.com/e8buxpa.jpeg"
+  //         alt="Default Image"
+  //         style={{ width: "40px", height: "40px", marginRight: "8px" }}
+  //         roundedCircle
+  //       />
+  //     );
+  //   }
+  // }, [user?.image_url]);
+  // Updating user avatar
+  // useEffect(() => {
+  //   const fetchUserAvatar = async () => {
+  //     if (user && user.id && !user.image_url) {
+  //       try {
+  //         const response = await fetch(
+  //           `${API_URLS.BASIC_URL}/users/${user.id}/get_avatar`
+  //         );
+  //         if (!response.ok) {
+  //           throw new Error("Failed to fetch user avatar");
+  //         }
+  //         const data = await response.json();
+  //         setUser({ ...user, image_url: data.image_url });
+  //       } catch (error) {
+  //         console.error("Error fetching user avatar:", error);
+  //       }
+  //     }
+  //   };
+
+  //   fetchUserAvatar();
+  // }, [user?.id, setUser]);
+  useEffect(() => {
+    const fetchUserAvatar = async () => {
+      if (user && user.id && !avatarUrl) {
+        try {
+          const response = await fetch(`/api/avatar/${user.id}`);
+          if (!response.ok) {
+            throw new Error("Failed to fetch user avatar");
+          }
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          setAvatarUrl(objectUrl);
+        } catch (error) {
+          console.error("Error fetching user avatar:", error);
+        }
+      }
+    };
+
+    fetchUserAvatar();
+
+    // Cleanup function to revoke the object URL
+    return () => {
+      if (avatarUrl) {
+        URL.revokeObjectURL(avatarUrl);
+      }
+    };
+  }, [user?.id, avatarUrl]);
+
   const avatarComponent = useMemo(() => {
-    if (user && user.image_url) {
+    if (avatarUrl) {
       return (
         <Image
-          src={`${API_URLS.SERVER_URL}${user.image_url}`}
+          src={avatarUrl}
           alt="User Profile"
           style={{ width: "40px", height: "40px", marginRight: "8px" }}
           roundedCircle
@@ -42,28 +114,7 @@ export default function NavBar() {
         />
       );
     }
-  }, [user?.image_url]);
-  // Updating user avatar
-  useEffect(() => {
-    const fetchUserAvatar = async () => {
-      if (user && user.id && !user.image_url) {
-        try {
-          const response = await fetch(
-            `${API_URLS.BASIC_URL}/users/${user.id}/get_avatar`
-          );
-          if (!response.ok) {
-            throw new Error("Failed to fetch user avatar");
-          }
-          const data = await response.json();
-          setUser({ ...user, image_url: data.image_url });
-        } catch (error) {
-          console.error("Error fetching user avatar:", error);
-        }
-      }
-    };
-
-    fetchUserAvatar();
-  }, [user?.id, setUser]);
+  }, [avatarUrl]);
 
   const title = (
     <div style={{ display: "flex", alignItems: "center" }}>
