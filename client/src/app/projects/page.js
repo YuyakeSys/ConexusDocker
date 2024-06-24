@@ -87,9 +87,6 @@ const ProjectsPage = () => {
   //     });
   // };
   // try using fetch to use the api routes function
-  useEffect(() => {
-    fetchData(searchQuery);
-  }, [currentPage, pageSize, filter, searchQuery]);
 
   const fetchData = async (searchQuery = "") => {
     try {
@@ -104,38 +101,66 @@ const ProjectsPage = () => {
     }
   };
 
-
+  // update fetch function
   const fetchRecommendProject = async () => {
-    const user_id = user?.id
-    axios
-      .get(`${API_URLS.BASIC_URL}projects`, {
-        params: { user_id: user_id },
+    const user_id = user?.id;
+    try {
+      const response = await fetch(`/api/projects?user_id=${user_id}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log("Recommended projects loaded successfully!");
-          console.log("Recommend projects: ", response.data.recommend_projects);
-          const recommendProjects = response.data.recommend_projects
-          const allProjectInfo = [];
-          recommendProjects.forEach(projectArray => {
-            const projectInfo = projectArray[0];
-            allProjectInfo.push(projectInfo);
-        });
-          setRecommendProject(allProjectInfo);
-        } else {
-          console.log(
-            `Recommended projects loading failed. Invalid response status: ${response.status}`
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(`Project loading failed. Error: ${error.message}`);
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Recommended projects loaded successfully!");
+        console.log("Recommend projects: ", data.recommend_projects);
+
+        const allProjectInfo = data.recommend_projects.map(
+          (projectArray) => projectArray[0]
+        );
+        setRecommendProject(allProjectInfo);
+      } else {
+        console.log(
+          `Recommended projects loading failed. Invalid response status: ${response.status}`
+        );
+      }
+    } catch (error) {
+      console.error(`Project loading failed. Error: ${error.message}`);
+    }
   };
+  // const fetchRecommendProject = async () => {
+  //   const user_id = user?.id
+  //   axios
+  //     .get(`${API_URLS.BASIC_URL}projects`, {
+  //       params: { user_id: user_id },
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         console.log("Recommended projects loaded successfully!");
+  //         console.log("Recommend projects: ", response.data.recommend_projects);
+  //         const recommendProjects = response.data.recommend_projects
+  //         const allProjectInfo = [];
+  //         recommendProjects.forEach(projectArray => {
+  //           const projectInfo = projectArray[0];
+  //           allProjectInfo.push(projectInfo);
+  //       });
+  //         setRecommendProject(allProjectInfo);
+  //       } else {
+  //         console.log(
+  //           `Recommended projects loading failed. Invalid response status: ${response.status}`
+  //         );
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(`Project loading failed. Error: ${error.message}`);
+  //     });
+  // };
 
   useEffect(() => {
     if (initialLoad) {
