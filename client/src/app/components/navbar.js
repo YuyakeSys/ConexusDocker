@@ -1,9 +1,8 @@
 // components/NavBar.js
 "use client";
 
-import { React, useEffect, useContext, useMemo } from "react";
+import { React, useEffect, useContext, useMemo, useState } from "react";
 
-import { API_URLS } from "@/app/utils/constant";
 import { useRouter } from "next/navigation";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
