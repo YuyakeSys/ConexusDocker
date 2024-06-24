@@ -24,7 +24,7 @@ export async function POST(request) {
 async function handleLogin({ email, password, rememberMe }) {
   try {
     const response = await axios.post(
-      `${API_URLS.BASIC_URL}/users/tokens/sign_in`,
+      `${API_URLS.SERVER_URL}/users/tokens/sign_in`,
       { email, password }
     );
     const { token, refresh_token, resource_owner } = response.data;

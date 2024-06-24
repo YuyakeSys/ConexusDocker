@@ -16,6 +16,7 @@ export async function GET(request) {
   const size = searchParams.get("size") || 10;
   const filter = searchParams.get("filter") || "";
   const search = searchParams.get("search") || "";
+  const user_id = searchParams.get("user_id") || "";
 
   const response = await fetch(
     `${API_URLS.BASIC_URL}/projects?page=${page}&size=${size}&filter=${filter}&search=${search}`
