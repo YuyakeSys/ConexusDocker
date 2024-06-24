@@ -1,7 +1,7 @@
 /*
  * @Author: Zhouyang Meng
  * @Date: 2024-06-14 11:52:30
- * @LastEditTime: 2024-06-24 10:15:54
+ * @LastEditTime: 2024-06-24 10:25:31
  * @Description:
  *
  * Copyright (c) 2024 by YuyakeSys, All Rights Reserved.
@@ -22,7 +22,7 @@ export async function GET(request) {
   );
 
   // If user_id is provided, fetch recommended projects instead
-  if (user_id) {
+  if (user_id !== null && user_id !== undefined && user_id !== "") {
     url = `${API_URLS.BASIC_URL}/projects?user_id=${user_id}`;
   }
 

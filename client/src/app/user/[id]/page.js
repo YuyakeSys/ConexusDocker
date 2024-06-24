@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState, useContext } from "react";
-import ConsultantProfile from "./consultantProfile";
 import SkillInput from "../component/form_skill";
 import CityInput from "../component/form_city";
 import CountryInput from "../component/form_country";
 import EntrepreneurProfile from "./entrepreneurProfile";
 import CompanyProfile from "./companyProfile";
+import ConsultantProfile from "./consultantProfile";
 import { AuthContext } from "@/app/utils/authContext";
 import { API_URLS } from "@/app/utils/constant";
 import "@/app/utils/iconLibrary";
