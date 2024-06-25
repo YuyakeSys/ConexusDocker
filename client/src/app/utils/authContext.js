@@ -1,7 +1,7 @@
 /*
  * @Author: Zhouyang Meng
  * @Date: 2024-02-16 03:07:34
- * @LastEditTime: 2024-05-07 12:37:17
+ * @LastEditTime: 2024-06-25 10:27:07
  * @Description:
  *
  * Copyright (c) 2024 by YuyakeSys, All Rights Reserved.
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUser = async (id) => {
     try {
-      const response = await fetch(`${API_URLS.BASIC_URL}users/${id}`);
+      const response = await fetch(`api/users/${id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch user");
       }

@@ -21,7 +21,7 @@ const EditPassword = () => {
     }
 
     try {
-      const response = await fetch(`${API_URLS.SERVER_URL}/users/password`, {
+      const response = await fetch('/api/users/password', {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
