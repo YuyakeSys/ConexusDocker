@@ -22,9 +22,7 @@ const ProjectDetailsPage = ({ params }) => {
 
   const fetchProject = async (id) => {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:3000/api/v1/projects/${id}`
-      );
+      const response = await fetch(`/api/projects/${id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch project");
       }
@@ -58,7 +56,8 @@ const ProjectDetailsPage = ({ params }) => {
     event.preventDefault();
 
     if (!user) {
-      router.push("https://localhost:8080/user/login");
+      // push to login router on deployed server
+      router.push("/user/login");
       return;
     } else {
       switch (event.target.name) {
@@ -67,12 +66,27 @@ const ProjectDetailsPage = ({ params }) => {
           router.push(editPath);
           break;
         case "delete":
-          axios
-            .delete(`http://127.0.0.1:3000/api/v1${pathname}`)
+          // axios
+          //   .delete(`http://127.0.0.1:3000/api/v1${pathname}`)
+          //   .then((response) => {
+          //     if (response.status === 204) {
+          //       console.log("Project delete successfully!");
+          //       router.push("/projects");
+          //     }
+          //   })
+          //   .catch((error) => {
+          //     console.error("Project delete failed. Error: ", error);
+          //   });
+          // test if the pathname correct
+          fetch(`/api/projects/${id}`, {
+            method: "DELETE",
+          })
             .then((response) => {
-              if (response.status === 204) {
-                console.log("Project delete successfully!");
+              if (response.status === 204 || response.ok) {
+                console.log("Project deleted successfully!");
                 router.push("/projects");
+              } else {
+                throw new Error("Failed to delete project");
               }
             })
             .catch((error) => {
@@ -87,23 +101,19 @@ const ProjectDetailsPage = ({ params }) => {
 
   const handleClose = () => {
     setShowAddModal(false);
-    axios
-      .get(`http://127.0.0.1:3000/api/v1/teams/search?projects_id=${params.id}`)
-      .then((response) => {
-        setTeamMembers(response.data.user_names);
-        console.log(
-          `Response user_names: ${JSON.stringify(response.data.user_names)}`
-        );
-      });
+    fetch(`/api/teams/search?projects_id=${params.id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTeamMembers(data.user_names);
+        console.log(`Response user_names: ${JSON.stringify(data.user_names)}`);
+      })
+      .catch((error) => console.error("Error:", error));
     router.push(`${params.id}`);
   };
 
   const handleConfirm = () => {
-    axios
-      .get(
-        `http://127.0.0.1:3000/api/v1/users/search?full_name=${consultantName}`
-      )
-      .then((response) => {
+    fetch(`/api/users?full_name=${encodeURIComponent(consultantName)}`).then(
+      (response) => {
         if (response.status === 200) {
           console.log(response.data.user_id);
           console.log(params);
@@ -124,7 +134,8 @@ const ProjectDetailsPage = ({ params }) => {
           console.log("User does not exist.");
           throw new Error();
         }
-      });
+      }
+    );
   };
 
   const handleShow = () => {

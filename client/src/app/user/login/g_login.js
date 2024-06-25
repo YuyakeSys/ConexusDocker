@@ -5,7 +5,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { AuthContext } from "@/app/utils/authContext";
 import { loginUser, signUpUser } from "@/app/utils/auth";
-// import { Avatar } from "../component/Avatar";
 
 const API_BASE_URL = "http://127.0.0.1:3000";
 
@@ -70,10 +69,13 @@ const GLogin = () => {
     // image_url,
   }) => {
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/v1/users/find_user`,
-        { params: { email } }
-      );
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
       let loginResponse;
       if (response.status === 200) {
         loginResponse = await loginUser(email, password, rememberMe);

@@ -7,6 +7,7 @@ export async function POST(request) {
   const body = await request.json();
   const { action, ...data } = body;
 
+  // define different routes for different functions
   switch (action) {
     case "login":
       return handleLogin(data);
